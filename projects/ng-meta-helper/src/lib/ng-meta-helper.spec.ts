@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NgMetaHelperService } from './ng-meta-helper.service';
+import { NgMetaHelper } from './ng-meta-helper';
 
 describe('NgMetaHelperService', () => {
-  let service: NgMetaHelperService;
+  let service: NgMetaHelper;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(NgMetaHelperService);
+    service = TestBed.inject(NgMetaHelper);
   });
 
   it('should be created', () => {

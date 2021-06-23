@@ -12,10 +12,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "paths": {
-      "ng-meta-helper": [
-        "dist/ng-meta-helper/ng-meta-helper",
-        "dist/ng-meta-helper"
-      ]
+      "ng-meta-helper": ["dist/ng-meta-helper/ng-meta-helper", "dist/ng-meta-helper"]
     },
     "experimentalDecorators": true,
     "moduleResolution": "node",
