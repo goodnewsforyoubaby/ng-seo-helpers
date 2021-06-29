@@ -17,6 +17,6 @@ export type SeoTags = {
   };
 };
 
-export interface SeoHelper extends Object {
-  createOrUpdateSeoTags?(): SeoTags | Promise<SeoTags> | Observable<SeoTags>;
+export interface SeoHelper {
+  createOrUpdateSeoTags(): SeoTags | Promise<SeoTags> | Observable<SeoTags>;
 }

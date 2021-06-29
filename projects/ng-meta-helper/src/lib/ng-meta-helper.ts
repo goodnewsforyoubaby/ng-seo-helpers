@@ -1,5 +1,5 @@
 import { ChildrenOutletContexts, NavigationEnd, Router } from '@angular/router';
-import { MetaConf, SeoHelper, SeoTags } from './types';
+import { MetaConf, SeoTags } from './types';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { Renderer2 } from '@angular/core';
@@ -32,19 +32,20 @@ export class NgMetaHelper {
       .subscribe((tags) => this.createElements(tags));
   }
 
-  private getActivatedComponents(): SeoHelper[] {
-    const components = [];
+  private getActivatedComponents(): any[] {
+    const components: any[] = [];
     let context = this.outletCtx.getContext('primary');
     while (context != null) {
-      if (context.outlet?.isActivated) {
-        components.push(context.outlet.component!);
+      const { outlet } = context;
+      if (outlet?.isActivated) {
+        components.push(outlet.component!);
       }
       context = context.children.getContext('primary');
     }
     return components;
   }
 
-  private getSeoTags(components: SeoHelper[]): Array<SeoTags | Promise<SeoTags> | Observable<SeoTags>> {
+  private getSeoTags(components: any[]): Array<SeoTags | Promise<SeoTags> | Observable<SeoTags>> {
     return components.reduce((acc, component) => {
       const tags = component.createOrUpdateSeoTags?.();
       if (tags != null) acc.push(tags);
