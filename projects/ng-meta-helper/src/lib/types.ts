@@ -18,5 +18,5 @@ export type SeoTags = {
 };
 
 export interface SeoHelper {
-  createOrUpdateSeoTags(): SeoTags | Promise<SeoTags> | Observable<SeoTags>;
+  updateTags(): SeoTags | Promise<SeoTags> | Observable<SeoTags>;
 }

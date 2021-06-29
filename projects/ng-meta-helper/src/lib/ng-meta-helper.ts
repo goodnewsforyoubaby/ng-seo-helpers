@@ -1,4 +1,4 @@
-import { ChildrenOutletContexts, NavigationEnd, Router } from '@angular/router';
+import { ChildrenOutletContexts, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { MetaConf, SeoTags } from './types';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
@@ -22,14 +22,14 @@ export class NgMetaHelper {
       .pipe(
         filter((e): e is NavigationEnd => e instanceof NavigationEnd),
         tap(() => this.removeElements()),
-        switchMap(() => {
+        switchMap<RouterEvent, Promise<SeoTags[]>>(() => {
           const components = this.getActivatedComponents();
           const tags = this.getSeoTags(components);
           return Promise.all(this.promisifySeoTags(tags));
         }),
-        map((tags) => this.mergeSeoTags(tags))
+        map((tags: SeoTags[]) => this.mergeSeoTags(tags))
       )
-      .subscribe((tags) => this.createElements(tags));
+      .subscribe((tags: SeoTags) => this.createElements(tags));
   }
 
   private getActivatedComponents(): any[] {
@@ -46,11 +46,11 @@ export class NgMetaHelper {
   }
 
   private getSeoTags(components: any[]): Array<SeoTags | Promise<SeoTags> | Observable<SeoTags>> {
-    return components.reduce((acc, component) => {
-      const tags = component.createOrUpdateSeoTags?.();
+    return components.reduce((acc: Array<SeoTags | Promise<SeoTags> | Observable<SeoTags>>, component: any) => {
+      const tags = component.updateTags?.();
       if (tags != null) acc.push(tags);
       return acc;
-    }, [] as Array<SeoTags | Promise<SeoTags> | Observable<SeoTags>>);
+    }, []);
   }
 
   private mergeSeoTags(tags: SeoTags[]): SeoTags {
