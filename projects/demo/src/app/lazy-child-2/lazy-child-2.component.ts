@@ -7,9 +7,7 @@ import { SeoHelper } from '../../../../ng-meta-helper/src/lib/types';
   styleUrls: ['./lazy-child-2.component.css'],
 })
 export class LazyChild2Component implements SeoHelper {
-  constructor() {}
-
-  createOrUpdateSeoTags() {
+  updateTags() {
     return {
       meta: {
         name: { 'some:name': 'value of some:name of LazyChild2Component' },
