@@ -1,6 +1,7 @@
 {
   "name": "ng-seo-helpers",
   "version": "0.0.0",
+  "description": "NgSeoHelpers",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,7 +12,7 @@
     "lint": "ng lint",
     "prepare": "husky install"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~12.0.2",
     "@angular/common": "~12.0.2",
@@ -60,5 +61,8 @@
     "*.{ts}": [
       "ng lint"
     ]
+  },
+  "publishConfig": {
+    "@YOUR-USERNAME:registry": "https://npm.pkg.github.com"
   }
 }
