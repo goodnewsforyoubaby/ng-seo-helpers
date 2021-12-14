@@ -1,9 +1,9 @@
 import { ChildrenOutletContexts, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { MetaConf, SeoTags } from './types';
-import { filter, first, map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { Renderer2 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { merge } from './utils';
 
 export class NgMetaHelper {
@@ -93,7 +93,7 @@ export class NgMetaHelper {
   private promisifySeoTags(tags: Array<SeoTags | Promise<SeoTags> | Observable<SeoTags>>): Array<Promise<SeoTags>> {
     return tags.map((tag) => {
       if (tag instanceof Promise) return tag;
-      if (tag instanceof Observable) return tag.pipe(first()).toPromise();
+      if (tag instanceof Observable) return firstValueFrom(tag);
       return Promise.resolve(tag);
     });
   }
