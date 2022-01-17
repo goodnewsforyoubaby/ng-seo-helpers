@@ -20,8 +20,8 @@ export class NgMetaHelper {
   ) {
     router.events
       .pipe(
-        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
         tap(() => this.removeElements()),
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
         switchMap<RouterEvent, Promise<SeoTags[]>>(() => {
           const components = this.getActivatedComponents();
           const tags = this.getSeoTags(components);
@@ -99,10 +99,14 @@ export class NgMetaHelper {
   }
 
   private addLinkElement(rel: string, href: string): HTMLLinkElement {
-    const element = this.renderer.createElement('link') as HTMLLinkElement;
-    this.renderer.setAttribute(element, 'rel', rel);
-    this.renderer.setAttribute(element, 'href', href);
-    this.renderer.appendChild(this.document.head, element);
-    return element;
+    const elements = Array.from(document.querySelectorAll<HTMLLinkElement>(`[rel=${rel}]`));
+    let target = elements.find((el) => el.getAttribute('href') === href);
+    if (target == null) {
+      target = this.renderer.createElement('link') as HTMLLinkElement;
+      this.renderer.setAttribute(target, 'rel', rel);
+      this.renderer.setAttribute(target, 'href', href);
+      this.renderer.appendChild(this.document.head, target);
+    }
+    return target;
   }
 }
