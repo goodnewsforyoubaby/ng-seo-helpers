@@ -99,7 +99,7 @@ export class NgMetaHelper {
   }
 
   private addLinkElement(rel: string, href: string): HTMLLinkElement {
-    const elements = Array.from(document.querySelectorAll<HTMLLinkElement>(`[rel=${rel}]`));
+    const elements = Array.from(this.document.querySelectorAll<HTMLLinkElement>(`[rel=${rel}]`));
     let target = elements.find((el) => el.getAttribute('href') === href);
     if (target == null) {
       target = this.renderer.createElement('link') as HTMLLinkElement;
