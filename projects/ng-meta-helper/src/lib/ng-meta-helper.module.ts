@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, inject, ModuleWithProviders, NgModule, Renderer2, RendererFactory2 } from '@angular/core';
+import { inject, ModuleWithProviders, NgModule, Renderer2, RendererFactory2, provideAppInitializer } from '@angular/core';
 import { ChildrenOutletContexts, Router, RouterModule } from '@angular/router';
 import { MetaConf } from './types';
 import { NgMetaHelper } from './ng-meta-helper';
@@ -13,9 +13,8 @@ export class NgMetaHelperModule {
     return {
       ngModule: NgMetaHelperModule,
       providers: [
-        {
-          provide: APP_INITIALIZER,
-          useFactory: () => {
+        provideAppInitializer(() => {
+        const initializerFn = (() => {
             const router = inject<Router>(Router);
             const outletCtx = inject<ChildrenOutletContexts>(ChildrenOutletContexts);
             const meta = inject<Meta>(Meta);
@@ -24,9 +23,9 @@ export class NgMetaHelperModule {
             const rendererFactory = inject<RendererFactory2>(RendererFactory2);
             const renderer = rendererFactory.createRenderer(doc, null);
             return () => Promise.resolve(new NgMetaHelper(router, outletCtx, meta, title, renderer, doc, conf));
-          },
-          multi: true,
-        },
+          })();
+        return initializerFn();
+      }),
       ],
     };
   }

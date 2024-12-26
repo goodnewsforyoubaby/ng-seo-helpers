@@ -10,17 +10,23 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "paths": {
-      "ng-meta-helper": ["dist/ng-meta-helper/ng-meta-helper", "dist/ng-meta-helper"]
+      "ng-meta-helper": [
+        "dist/ng-meta-helper/ng-meta-helper",
+        "dist/ng-meta-helper"
+      ]
     },
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "esModuleInterop": false,
-    "target": "es2020",
+    "esModuleInterop": true,
+    "target": "ES2022",
     "module": "es2020",
-    "lib": ["es2018", "dom"]
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

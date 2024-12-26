@@ -4,9 +4,10 @@ import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-lazy-child-1',
-  templateUrl: './lazy-child-1.component.html',
-  styleUrls: ['./lazy-child-1.component.css'],
+    selector: 'app-lazy-child-1',
+    templateUrl: './lazy-child-1.component.html',
+    styleUrls: ['./lazy-child-1.component.css'],
+    standalone: false
 })
 export class LazyChild1Component implements SeoHelper {
   updateTags() {
