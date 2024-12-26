@@ -20,8 +20,8 @@ export class NgMetaHelper {
   ) {
     router.events
       .pipe(
-        tap(() => this.removeElements()),
         filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        tap(() => this.removeElements()),
         switchMap<RouterEvent, Promise<SeoTags[]>>(() => {
           const components = this.getActivatedComponents();
           const tags = this.getSeoTags(components);

@@ -6,11 +6,11 @@
     "meta tags",
     "angular"
   ],
-  "version": "1.2.0",
+  "version": "19.0.0",
   "peerDependencies": {
-    "@angular/core": "^13.1.0",
-    "@angular/router": "^13.1.0",
-    "rxjs": "^7.4.0"
+    "@angular/core": "^19.0.0",
+    "@angular/router": "^19.0.0",
+    "rxjs": "^7.0.0"
   },
   "dependencies": {
     "tslib": "^2.1.0"
