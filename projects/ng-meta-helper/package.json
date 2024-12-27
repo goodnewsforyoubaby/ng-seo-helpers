@@ -6,7 +6,7 @@
     "meta tags",
     "angular"
   ],
-  "version": "19.0.0",
+  "version": "19.0.1",
   "peerDependencies": {
     "@angular/core": "^19.0.0",
     "@angular/router": "^19.0.0",

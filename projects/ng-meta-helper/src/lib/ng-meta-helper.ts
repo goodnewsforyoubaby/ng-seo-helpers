@@ -1,4 +1,4 @@
-import { ChildrenOutletContexts, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { ChildrenOutletContexts, NavigationEnd, Scroll, Router, RouterEvent } from '@angular/router';
 import { MetaConf, SeoTags } from './types';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ export class NgMetaHelper {
   ) {
     router.events
       .pipe(
-        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd || e instanceof Scroll),
         tap(() => this.removeElements()),
         switchMap<RouterEvent, Promise<SeoTags[]>>(() => {
           const components = this.getActivatedComponents();
